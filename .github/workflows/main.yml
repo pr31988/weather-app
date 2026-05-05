@@ -1,0 +1,52 @@
+name: Docker Image CI
+
+on: 
+  push:
+    branches: [ "master" ]
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**' 
+
+permissions:
+  id-token: write # Required for requesting the JWT
+  contents: read  # Required for actions/checkout
+
+env:
+  ACR_NAME: weatheracr123
+  IMAGE_NAME: weather-app
+  RESOURCE_GROUP: weather-rg
+  WEBAPP_NAME: weather-app
+  
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: checkout clones repo to runner
+      uses: actions/checkout@v4
+
+     #login to Azure
+    - name: Azure login
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
+
+    - name: terraform init
+      run: |
+        cd terraform
+        terraform init
+
+    - name: terraform apply
+      run: |
+        cd terraform
+        terraform apply -auto-approve
+        
+    - name: ACR login
+      run: |
+        az acr login --name $ACR_NAME
+    
+    - name: Build the Docker image
+      run: |
+        docker build --file Dockerfile --tag $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ github.sha }} .
