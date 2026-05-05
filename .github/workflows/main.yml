@@ -25,6 +25,12 @@ jobs:
     - name: checkout clones repo to runner
       uses: actions/checkout@v4
 
+    # setup/install terraform version
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+       terraform_version: 1.5.0
+       
      #login to Azure
     - name: Azure login
       uses: azure/login@v2
