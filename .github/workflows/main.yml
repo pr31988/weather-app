@@ -66,3 +66,7 @@ jobs:
     - name: Build the Docker image
       run: |
         docker build --file Dockerfile --tag $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ github.sha }} .
+
+    - name: Push image to ACR
+      run: |
+        docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ github.sha }}
