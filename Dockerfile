@@ -13,9 +13,16 @@ RUN npm install
 # copy the rest of the application code
 COPY . .   
 
+Run npm run build 
+
+#Runtime stage
+From nginx:alpine
+
+COPY --from=build /app/dist /usr/share/nginx/html
+
 # expose the port the app runs on
-EXPOSE 3000
+EXPOSE 80
 
 # start the application
-CMD ["node", "app.js"]
+CMD ["nginx","-g", "daemon off;"]
 
