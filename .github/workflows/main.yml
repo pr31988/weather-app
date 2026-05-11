@@ -13,9 +13,9 @@ permissions:
 
 env:
   ACR_NAME: weatheracr123
-  IMAGE_NAME: weather-app
+  IMAGE_NAME: weather-app1988
   RESOURCE_GROUP: weather-rg
-  WEBAPP_NAME: weather-app
+  WEBAPP_NAME: weather-app1988
   
 jobs:
   build-and-deploy:
