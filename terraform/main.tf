@@ -48,7 +48,6 @@ resource "azurerm_linux_web_app" "app" {
 
      site_config {
        container_registry_use_managed_identity = true
-       linux_fx_version = "DOCKER|weatheracr123.azurecr.io/weather-app1988:latest" 
      }
 
      identity {
@@ -57,6 +56,7 @@ resource "azurerm_linux_web_app" "app" {
 
      app_settings = {
       DOCKER_REGISTRY_SERVER_URL = "https://weatheracr123.azurecr.io"
+      DOCKER_CUSTOM_IMAGE_NAME   = "weather-app1988:latest"
      }
   }
 
