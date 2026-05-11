@@ -37,7 +37,7 @@ resource "azurerm_service_plan" "plan" {
     resource_group_name = azurerm_resource_group.rg.name
     location = azurerm_resource_group.rg.location
     os_type = "Linux"
-    sku_name = "B1"
+    sku_name = "F1"
 }
 
 resource "azurerm_linux_web_app" "app" {
@@ -48,11 +48,16 @@ resource "azurerm_linux_web_app" "app" {
 
      site_config {
        container_registry_use_managed_identity = true
+       linux_fx_version = "DOCKER|weatheracr123.azurecr.io/weather-app1988:latest" 
      }
 
      identity {
       type = "SystemAssigned"
      } 
+
+     app_settings = {
+      DOCKER_REGISTRY_SERVER_URL = "https://weatheracr123.azurecr.io"
+     }
   }
 
   #resource "azurerm_role_assignment" "acr_pull" {
