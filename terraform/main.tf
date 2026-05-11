@@ -8,12 +8,12 @@ terraform {
     }
   }
 
- backend "azurerm" {
-    resource_group_name  = "weather-rg"
-    storage_account_name = "weathertfstate1988"
-    container_name       = "tfstate"
-    key                  = "terraform.tfstate"
-  }
+ #backend "azurerm" {
+ #   resource_group_name  = "weather-rg"
+ #   storage_account_name = "weathertfstate1988"
+ #   container_name       = "tfstate"
+ #   key                  = "terraform.tfstate"
+ # }
 }
 provider "azurerm"{
    features {}
