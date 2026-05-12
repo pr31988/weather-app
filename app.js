@@ -3,7 +3,7 @@ const axios = require('axios');
 require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 8080;
 
 app.get("/", (req, res) => {
   res.redirect("/weather");
@@ -24,6 +24,6 @@ app.get('/weather', async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Weather app listening at http://localhost:${port}`);
+app.listen(PORT , '0.0.0.0', => {
+    console.log(`Weather app listening at http://localhost:${PORT}`);
 });
