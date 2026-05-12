@@ -1,5 +1,5 @@
 # base Image
-FROM node:20-alpine
+FROM node:20-alpine As build
 
 # set working directory
 WORKDIR /app
@@ -12,7 +12,6 @@ RUN npm install
 
 # copy the rest of the application code
 COPY . .   
-
 Run npm run build 
 
 #Runtime stage
