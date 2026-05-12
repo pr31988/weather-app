@@ -46,17 +46,17 @@ resource "azurerm_linux_web_app" "app" {
      location = azurerm_resource_group.rg.location
      service_plan_id = azurerm_service_plan.plan.id
 
-     site_config {
-       container_registry_use_managed_identity = true
-     }
-
      identity {
       type = "SystemAssigned"
      } 
 
-     app_settings = {
-      DOCKER_REGISTRY_SERVER_URL = "https://weatheracr123.azurecr.io"
-      DOCKER_CUSTOM_IMAGE_NAME   = "weather-app1988:latest"
+     site_config {
+       container_registry_use_managed_identity = true
+
+       application_stack {
+          docker_image_name = "weatheracr.123.azure.io/weather-app1988:latest"
+          docker_registry_url = "https://weatheracr123.azure.io"
+       }
      }
   }
 
