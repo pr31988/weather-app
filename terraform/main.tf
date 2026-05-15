@@ -21,7 +21,7 @@ provider "azurerm"{
 
 resource "azurerm_resource_group" "rg" {
     name = "weather-rg"
-    location = "central india"
+    location = "south india"
 }
 
 resource "azurerm_container_registry" "acr" {
